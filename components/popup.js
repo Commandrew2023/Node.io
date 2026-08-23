@@ -66,4 +66,4 @@
     }
   }
   module.Popup = Popup;
-})();
+})(this);
