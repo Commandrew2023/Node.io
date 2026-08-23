@@ -57,7 +57,7 @@
 	
 		const {width, height} = Settings.canvas.forElement();
 	
-		graphics.canvasBackground();
+		graphics.canvasBackground(ctx);
 	
 		Interactor.update(canvas);
 	
@@ -74,7 +74,7 @@
 		ctx.scale(s, s);
 		ctx.translate(offset.x, offset.y);
 
-		graphics.canvasCanvas();
+		graphics.canvasCanvas(ctx);
 	
 		for (let i = 0; i < Flats.Elements.length; i++) {
 			const element = Flats.Elements[i];
