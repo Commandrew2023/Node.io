@@ -41,10 +41,12 @@
         children : [
           {
             type : 'div',
+            id : 'title',
             html : this.message.title,
           },
           {
             type : 'div',
+            id : 'body',
             html : this.message.body
           }
         ]
