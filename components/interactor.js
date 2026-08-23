@@ -288,6 +288,20 @@
             setFormat : function (format) {
                 this.format = format;
                 this.setActive();
+
+                let message = '';
+                switch (format.name) {
+                    case "default:poly_regular": case "default:poly": case "default:bezier_chain": case "default:bezier": case "default:triangle":
+                        message = 'To create a shape, click on a starting position and hold down the mouse. To append a new node, press the "n" key. Release the mouse to finish creating your shape.';
+                    break;
+                    default:
+                        message = 'To create a shape, click and drag across the screen. Release the mouse to finish creating your shape.';
+                    break;
+                }
+
+                let popup = new Popup('Shape Creation', message);
+                popup.setDuration(8000);
+                popup.deploy();
             },
             setType : function (type) {
                 this.type = type;
