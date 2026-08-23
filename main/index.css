@@ -1,0 +1,1181 @@
+body {
+    overflow-y : hidden;
+    overflow-x : hidden;
+}
+
+:root {
+    /*--ui-background : rgb(35, 20, 32);*/
+    --ui-background : rgb(255, 255, 255);
+    --ui-hover : rgba(39, 39, 39, 0.2);
+    /*--ui-outline : rgb(140, 80, 128);*/
+    --ui-outline : rgb(160, 160, 160);
+    --ui-items-field : rgb(213, 213, 213);
+
+    /*--ui-text-color : rgb(245, 245, 245);*/
+    --ui-text-color : rgb(21, 21, 21);
+    --ui-text-color-hovered : rgba(21, 21, 21, 0.5);
+    --ui-text-font : consolas;
+}
+
+
+/* NAVBAR AND TOOLS STYLING */
+#tools {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : wrap;
+    position : relative;
+
+    margin-top : -8px;
+    margin-left : -8px;
+
+    min-height : 20vh;
+    max-height : 20vh;
+    width : calc(100% + 16px);
+
+    border-bottom : 1px solid var(--ui-outline);
+
+    background : var(--ui-background);
+}
+#navbar {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    position : relative;
+    box-sizing : border-box;
+
+    width : 100%;
+    height : 3vh;
+
+    border-bottom : 1px solid var(--ui-outline);
+
+    background : var(--ui-background);
+}
+.navbar-button {
+    display : inline-flex;
+    align-items : center;
+    justify-content : center;
+    position : relative;
+
+    width : fit-content;
+    padding-left : 1em;
+    padding-right : 1em;
+
+    border : none;
+
+    background : transparent;
+
+    color : var(--ui-text-color);
+    font-family : var(--ui-text-font);
+
+    transition : color 0.1s;
+}
+.navbar-button[selected=true] {
+    border-bottom : 3px solid var(--ui-outline);
+}
+.navbar-button:hover {
+    color : var(--ui-text-color-hovered);
+    cursor : pointer;
+}
+#ribbons {
+    display : flex;
+    flex-direction : column;
+    align-items : top;
+    position : relative;
+    float : left;
+
+    margin-top : 0px;
+
+    height : 17vh;
+}
+.ribbon {
+    display : flex;
+    position : relative;
+    box-sizing : border-box;
+
+    padding-top : 4px;
+    padding-bottom : 4px;
+    padding : 0px;
+
+    height : 100%;
+}
+.ribbon-section {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+    position : relative;
+    box-sizing : border-box;
+
+    width : fit-content;
+    height : 100%;
+
+    border-right : 1px solid var(--ui-outline);
+}
+.ribbon-section-body-wrapper {
+    display : inline-flex;
+    align-items : center;
+    position : relative;
+    box-sizing : border-box;
+
+    width : 100%;
+    height : calc(100% - 1em);
+
+    background : transparent;
+}
+.ribbon-section-body {
+    display : inline-flex;
+    flex-direction : column;
+    box-sizing : border-box;
+
+    width : 100%;
+    height : 100%;
+    
+    padding : 1em;
+
+    color : var(--ui-text-color);
+}
+.ribbon-section-body div {
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    flex-wrap : nowrap;
+
+    margin-top : 0.1em;
+    margin-bottom : 0.1em;
+}
+.ribbon-section-body .label {
+    font-size : 1em;
+    margin-right : 0.25em;
+}
+.ribbon-section-body input {
+    display : block;
+    align-items : center;
+    justify-content : center;
+
+    width : fit-content;
+    min-width : 1em;
+    max-width : 4em;
+}
+.ribbon-section-label-wrapper {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : center;
+    position : relative;
+
+    min-height : 1em;
+    max-height : 1em;
+
+    background : transparent;
+}
+.ribbon-section-label {
+    display : inline-flex;
+    position : relative;
+    z-index : 1000;
+
+    color : var(--ui-text-color-hovered);
+    font-family : consolas;
+    font-size : 0.75em;
+}
+
+
+.ribbon-section button {
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    position : relative;
+    
+    border : none;
+    border-radius : 4px;
+    padding : 0.3em;
+    margin : 2px;
+    
+    height : fit-content;
+    
+    background : var(--ui-background);
+    
+    font-family : consolas;
+    color : var(--ui-text-color);
+}
+.ribbon-section button span {
+    font-size : 1.25em;
+}
+.ribbon-section button:hover {
+    background : var(--ui-hover);
+    
+    cursor : pointer;
+}
+.ribbon-section button[toggled="true"] {
+    background : var(--ui-hover);
+}
+.ribbon-section label {
+    padding-right: 8px;
+    
+    width : fit-content;
+    
+    color : var(--ui-text-color);
+    font-size : 0.7em;
+}
+.ribbon-section input {
+    position : relative;
+    
+}
+.ribbon-section input:hover {
+    /*cursor : pointer;*/
+}
+.ribbon-section * .tool-tip {
+    display : none;
+    position : absolute;
+    z-index : 100000;
+
+    left : 100%;
+    top : 100%;
+    
+    border : solid var(--ui-hover) 1px;
+    padding : 4px;
+    margin-left : 0;
+    
+    max-width : 12em;
+    width : 12em;
+    
+    background : var(--ui-background);
+    
+    text-align : left;
+    color : var(--ui-text-color);
+    
+    animation : tool-tip 2s;
+}
+.ribbon-section *[hastooltip="true"]:hover .tool-tip {
+    display : block;
+    
+    cursor : pointer;
+}
+@keyframes tool-tip {
+    0% {
+        opacity : 0;
+        display : none;
+    }
+    90% {
+        opacity : 0;
+        display : none;
+    }
+    100% {
+        opacity : 1;
+        display : block;
+    }
+}
+.ribbon-section .general-symbol {
+    position : absolute;
+    
+    right : 1px;
+    bottom : -3px;
+    
+    text-shadow : -1px -1px 0 var(--ui-background), 1px -1px 0 var(--ui-background), -1px 1px 0 var(--ui-background), 1px 1px 0 var(--ui-background);  
+    
+    color : var(--ui-text-color-hovered);
+    font-size : 14px;
+}
+.ribbon-section .exclude-symbol {
+    position : absolute;
+    
+    right : 4px;
+    bottom : -2px;
+    
+    background : var(--ui-background);
+    clip-path : circle(5px at center center);
+    
+    color : red;
+    font-size : 10px;
+}
+.ribbon-section .addition-symbol {
+    position : absolute;
+    
+    right : 1px;
+    bottom : -3px;
+    
+    text-shadow : -1px -1px 0 var(--ui-background), 1px -1px 0 var(--ui-background), -1px 1px 0 var(--ui-background), 1px 1px 0 var(--ui-background);  
+    
+    color : green;
+    font-size : 14px;
+}
+.ribbon-section .subtraction-symbol {
+    position : absolute;
+    
+    right : 1px;
+    bottom : -3px;
+    
+    text-shadow : -1px -1px 0 var(--ui-background), 1px -1px 0 var(--ui-background), -1px 1px 0 var(--ui-background), 1px 1px 0 var(--ui-background);  
+    
+    color : red;
+    font-size : 14px;
+}
+.ribbon-section .subtitle {
+    position : absolute;
+    display : inline;
+    
+    bottom : -0px;
+    
+    color : var(--ui-text-color-hovered);
+    font-size : 10px;
+    font-family : consolas;
+    text-align : center;
+}
+
+
+.picker {
+    display : flex;
+    flex-direction : row;
+    position : relative;
+    display : block;
+    
+    border : solid var(--ui-outline) 1px;
+    border-radius : 4px;
+    margin : 2px;
+    
+    width : 6em;
+    height : 20px;
+    
+    color : var(--ui-text-color);
+}
+.picker .value {
+    display : flex;
+    align-items : center;
+    justify-content : left;
+    position : relative;
+    box-sizing : border-box;
+    white-space: nowrap;
+    overflow-x: hidden;
+    float : left;
+    
+    padding : 0.3em;
+    
+    width : calc(100% - 12px);
+
+    text-align : center;
+    font-size : 0.9em;
+}
+.picker .selector {
+    position : relative;
+    float : right;
+    box-sizing : border-box;
+    
+    border-left : solid var(--ui-outline) 1px;
+    padding-top : 1px;
+    
+    height : 100%;
+    width : 12px;
+}
+.picker .selector .material-symbols-outlined {
+    position : absolute;
+    display : block;
+    
+    left : -0.15em;
+    
+    color : var(--ui-text-color);
+    font-size : 16px;
+    text-align : center;
+}
+.picker .selector:hover {
+    cursor : pointer;
+    background : var(--ui-outline);
+}
+.picker .dropdown {
+    display : none;
+    flex-direction : column;
+    position : absolute;
+    box-sizing : border-box;
+    z-index : 10000;
+    
+    border : solid var(--ui-outline) 1px;
+    box-shadow : 0px 2px 4px var(--ui-outline);
+    
+    top : 20px;
+    white-space: nowrap; 
+    
+    background : var(--ui-background);
+    
+    color : var(--ui-text-color);
+    
+    animation : dropdownappear 0.25s 1;
+}
+@keyframes dropdownappear {
+    from {top:-20px;opacity:0;}
+    to {top:20px;opacity:1;}
+}
+.picker .dropdown button {
+    display : flex;
+    align-items : center;
+    justify-content : center;
+
+    padding : 0.5em 2em;
+    border-radius : 0;
+    border : none;
+
+    width : 100%;
+    
+    color : var(--ui-text-color);
+
+    background : var(--ui-background);
+}
+.picker .dropdown button:hover * {
+    background : transparent;
+}
+.picker .dropdown button:hover {
+    background : var(--ui-hover);
+    cursor : pointer;
+}
+
+
+
+
+/* SHELL ELEMENT FOR CANVAS AND PANES */
+#shell {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : left;
+    box-sizing : border-box;
+
+    margin-left : -8px;
+    margin-right : -8px;
+    margin-bottom : -8px;
+
+    padding-top : 4px;
+    padding-bottom : 4px;
+
+    background : var(--ui-background);
+}
+#shell * {
+    
+}
+
+
+/* DRAWING CANVAS STYLING */
+#canvas {
+    display : flex;
+    flex-direction : column;
+    align-items : top;
+    justify-content : center;
+    box-sizing : border-box;
+    position : relative;
+
+    float : left;
+
+    width : 100%;
+    height : 80vh;
+
+    background : var(--ui-background);
+}
+#canvas canvas {
+    display : block;
+    position : relative;
+
+    margin-top : 0px;
+    margin-left : -2px;
+    margin-right : -2px;
+
+    /*width : auto;
+    max-width : 100%;
+
+    height : auto;*/
+    /*max-height : calc(80vh + 8px);*/
+}
+
+
+/* 'CONTROLLER' STYLING */
+#controller {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+    box-sizing : border-box;
+    position : relative;
+    overflow-x : hidden;
+
+    border-left : 1px solid var(--ui-outline);
+
+    width : 0px;
+    height : calc(80vh - 8px);
+}
+#controller[open=true] {
+    width : 20vw;
+    padding-top : 3vh;
+}
+#controller-buttons {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    position : fixed;
+    z-index : 10000;
+
+    margin-left : 1px;
+    margin-top : -3vh;
+
+    width : 100%;
+    height : 3vh;
+
+    border-bottom : 1px solid var(--ui-outline);
+
+    background : var(--ui-background);
+}
+.controller-button {
+    display : inline-flex;
+    align-items : center;
+    justify-content : center;
+    position : relative;
+
+    width : fit-content;
+    padding-left : 1em;
+    padding-right : 1em;
+
+    border : none;
+
+    background : transparent;
+
+    color : var(--ui-text-color);
+    font-family : var(--ui-text-font);
+
+    transition : color 0.1s;
+}
+.controller-button[selected=true] {
+    border-bottom : 3px solid var(--ui-outline);
+}
+.controller-button:hover {
+    color : var(--ui-text-color-hovered);
+    cursor : pointer;
+}
+
+
+/* PANES STYLING */
+#panes {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : wrap;
+    box-sizing : border-box;
+    position : relative;
+
+    float : left;
+
+    border-right : 1px solid var(--ui-outline);
+
+    width : 0px;
+    height : calc(80vh - 8px);
+}
+#panes[open=true] {
+    width : 20vw;
+}
+
+
+/* PANEL DROPDOWN STYLING */
+.panel-button {
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    position : absolute;
+    z-index : 1000;
+
+    top : 0px;
+    width : 2em;
+    height : 2em;
+
+    color : var(--ui-text-color);
+
+    transition : color 0.1s;
+}
+.panel-button:hover {
+    color : var(--ui-text-color-hovered);
+    cursor : pointer;
+}
+.panel-button[side='left'] {left : 0px;}
+.panel-button[side='right'] {right : 0px;}
+.panel-page {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+
+    padding-right : 1.5em;
+}
+.panel-dropdown {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+
+    width : 100%;
+
+    color : var(--ui-text-color);
+    font-family : var(--ui-text-font);
+    font-size : 0.8em;
+}
+.panel-dropdown:hover {
+    cursor : pointer;
+}
+.panel-dropdown-label {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+}
+.panel-dropdown-name {
+    display : block;
+    position : relative;
+    min-width : 2em;
+}
+.panel-dropdown .dropdown-drag {
+    display : none;
+}
+.panel-dropdown:hover .dropdown-drag {
+    display : block;
+}
+.panel-dropdown-name:hover {
+    cursor : text;
+}
+.panel-dropdown:hover .panel-dropdown-delete {
+    display : flex;
+}
+.panel-dropdown-delete {
+    display : none;
+    align-items : center;
+    justify-content : center;
+    position : absolute;
+    float : right;
+    right : 1.25em;
+
+    background : transparent;
+    border : none;
+    border-radius : 8px;
+    padding : 0.25em;
+    color : var(--ui-text-color);
+
+    transition : background 0.5s;
+}
+.panel-dropdown-delete .material-symbols-outlined {
+    font-size : 1.25em;
+}
+.panel-dropdown-delete:hover {
+    cursor : pointer;
+    background : var(--ui-hover);
+}
+.panel-dropdown-body {
+    display : none;
+    flex-direction : column;
+    flex-wrap : nowrap;
+
+    margin-left : 2em;
+}
+.panel-dropdown-field {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+
+    margin-bottom : 0.25em;
+    margin-top : 0.25em;
+}
+.group-field {
+    border-bottom : 1px solid var(--ui-hover);
+    margin-top : 0.25em;
+
+    color : var(--ui-outline);
+}
+.panel-dropdown-field .field-label {
+    display : flex;
+    align-items : center;
+    justify-content : left;
+    box-sizing : border-box;
+
+    width : 8em;
+    max-width : 8em;
+}
+.panel-dropdown-field:has(.nodes-field) {
+    align-items : center;
+}
+.panel-dropdown-field input {
+    border : 1px solid var(--ui-outline);
+    border-radius : 0.2em;
+
+    padding : 0.2em;
+}
+.panel-dropdown-field .nodes-field {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+    box-sizing : border-box;
+
+    padding : 0.25em;
+    
+    border-radius : 0.75em;
+    width : fit-content;
+    height : fit-content;
+
+    background : var(--ui-items-field);
+}
+.panel-dropdown-field .nodes-field .node {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+    box-sizing : border-box;
+    position : relative;
+
+    margin : 0.25em;
+    padding-left : 0.5em;
+    padding-right : 0.5em;
+
+    height : 3em;
+
+    border-radius : 4px;
+
+    background : var(--ui-background);
+}
+.panel-dropdown-field .nodes-field .node:hover {
+    background : var(--ui-outline);
+}
+.panel-dropdown-field .top-zone {
+    display : block;
+    position : absolute;
+
+    margin-top : -5px;
+
+    width : 50px;
+    height : 50px;
+
+    background : gray;
+}
+.panel-dropdown-field .nodes-field .node-to-location:hover .top-zone {
+    display : block;
+}
+.panel-dropdown-field .nodes-field .node-to-location:hover .bottom-zone {
+    display : block;
+}
+.panel-dropdown-field .nodes-field .node-grabbed {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+    box-sizing : border-box;
+
+    position : absolute;
+}
+.panel-dropdown-field .nodes-field .node .node-input {
+    display : inline-block;
+    position : relative;
+
+    max-width : 4em;
+
+    margin-right : 0.5em;
+}
+.panel-dropdown-field .nodes-field .material-symbols-outlined {
+    background : transparent;
+}
+.panel-dropdown-field .nodes-field .node button {
+    display : block;
+    position : relative;
+
+    background : transparent;
+    border : none;
+    border-radius : 8px;
+    padding : 0.25em;
+    font-size : 1.5em;
+    color : var(--ui-text-color);
+
+    transition : background 0.5s;
+}
+.panel-dropdown-field .nodes-field .node button:hover {
+    cursor : pointer;
+    background : var(--ui-hover);
+}
+.panel-dropdown-field:has(.elements-field) {
+    /*align-items : flex-start;*/
+}
+.panel-dropdown-field .elements-field {
+    display : flex;
+    flex-direction : column;
+    flex-wrap : nowrap;
+    justify-content : center;
+    box-sizing : border-box;
+
+    padding : 0.25em;
+    
+    border-radius : 0.75em;
+    width : fit-content;
+    height : fit-content;
+
+    background : var(--ui-items-field);
+}
+.panel-dropdown-field .elements-field .element {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+    box-sizing : border-box;
+    position : relative;
+    overflow : hidden;
+
+    margin : 0.25em;
+    padding-left : 0.5em;
+    padding-right : 0.5em;
+
+    width : 20em;
+    height : 3em;
+
+    border-radius : 4px;
+
+    background : var(--ui-background);
+}
+.panel-dropdown-field .elements-field .element .element-uuid {
+    white-space : nowrap;
+
+    padding-right : 3em;
+    width : 85%;
+    overflow : hidden;
+}
+.panel-dropdown-field .elements-field .element button {
+    display : block;
+    position : relative;
+    float : right;
+
+    background : transparent;
+    border : none;
+    border-radius : 8px;
+    padding : 0.25em;
+    font-size : 1.5em;
+    color : var(--ui-text-color);
+    width : 15%;
+
+    transition : background 0.5s;
+}
+.panel-dropdown-field .elements-field .element button:hover {
+    cursor : pointer;
+    background : var(--ui-hover);
+}
+.panel-dropdown-field .elements-field #addnew {
+    display : flex;
+    flex-direction : row;
+    flex-wrap : nowrap;
+    align-items : center;
+    justify-content : center;
+    box-sizing : border-box;
+    position : relative;
+
+    margin : 0.25em;
+    border : none;
+    border-radius : 4px;
+    padding : 0.25em;
+
+    width : fit-content;
+    height : fit-content;
+    
+    font-size : 1.5em;
+    color : white;
+
+    background : transparent;
+    transition : background 0.5s;
+}
+.panel-dropdown-field .elements-field #addnew:hover {
+    cursor : pointer;
+    background : var(--ui-hover);
+}
+.panel-dropdown-body select {
+    display : block;
+    position : relative;
+
+    width : fit-content;
+    min-width : 50px;
+}
+.panel-dropdown-field .field-delete {
+    display : none;
+    align-items : center;
+    justify-content : center;
+    position : absolute;
+    float : right;
+    right : 0.25em;
+
+    background : transparent;
+    border : none;
+    border-radius : 8px;
+    padding : 0.25em;
+    color : var(--ui-text-color);
+    font-size : 1.25em;
+
+    transition : background 0.5s;
+}
+.panel-dropdown-field:hover .field-delete {
+    display : flex;
+}
+.panel-dropdown-field .field-delete:hover {
+    cursor : pointer;
+    background : var(--ui-hover);
+}
+
+
+/* CONTEXTMENU STYLING*/
+.context-menu {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    position : fixed;
+    overflow : hidden;
+    box-sizing : border-box;
+    gap : 0em;
+
+    border : 1px var(--ui-outline) solid;
+    border-radius : 0.5em;
+    border-top-left-radius : 0px;
+    padding : 0.35em 0;
+
+    width : fit-content;
+    height : fit-content;
+
+    background : var(--ui-background);
+
+    animation : contextMenuAppear 0.3s 1;
+}
+@keyframes contextMenuAppear {
+    0% {opacity:0;margin-top:-0.75em;}
+    100% {opacity:1;margin-top:0px;}
+}
+.context-menu button {
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    position : relative;
+
+    border : none;
+    border-radius : 0px;
+    padding : 0.2em;
+
+    width : fit-content;
+    min-width : 12em;
+    height : fit-content;
+
+    background : transparent;
+}
+.context-menu button:hover {
+    background : var(--ui-hover);
+}
+.context-menu button .material-symbols-outlined {
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    justify-content : center;
+    position : relative;
+
+    margin-right : 0.25em;
+    padding-top : 0.07em;
+
+    width : 1.5em;
+
+    font-size : 1.25em;
+}
+.context-menu button .label {
+    font-size : 1em;
+}
+
+
+/* WINDOW STYLING */
+.window {
+    box-shadow : 0 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+.window #windowheader {
+    display : inline-flex;
+    flex-direction : row;
+    justify-content : end;
+}
+.window #windowheader button {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : center;
+    box-sizing : border-box;
+    float : right;
+
+    padding : 0px;
+    width : 1.5em;
+    height : 1.5em;
+
+    color : white;
+    font-size : 1em;
+    background : transparent;
+
+}
+.window #windowheader #windowname {
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    position : absolute;
+    box-sizing : border-box;
+
+    left : 0px;
+    top : 0px;
+    height : 1.5em;
+    padding : 0.25em;
+
+    color : white;
+}
+.window #windowbody {
+    margin-top : 0px;
+    padding : 0px;
+
+    overflow : hidden;
+}
+
+
+/* CONTROL WINDOW STYLING */
+.window #windowbody .advanced-control-back {
+    display : flex;
+    flex-direction : row;
+    position : relative;
+    
+    margin-top : calc(-1.25em);
+    width : 100%;
+    height : 100%;
+
+    background : rgb(48, 49, 55);
+}
+.window #windowbody .advanced-control-menu {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    box-sizing : border-box;
+
+    position : relative;
+
+    padding : 1em;
+    width : fit-content;
+    height : 100%;
+
+    background : rgb(80, 82, 92);
+}
+.advanced-control-menu .section {
+    margin-top : 0.5em;
+    margin-bottom : 0.5em;
+
+    max-width : 80%;
+    min-width : fit-content;
+    border-bottom : 1px solid rgba(255, 255, 255, 0.3);
+    color : rgba(255, 255, 255, 0.3);
+    text-align : center;
+}
+.advanced-control-menu .section-drop {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+.advanced-control-menu .section-drop button {
+    margin-top : 0.25em;
+    margin-bottom : 0.25em;
+
+    width : 8em;
+    min-height : 1em;
+}
+.window #windowbody .advanced-control-board {
+    display : block;
+    position : relative;
+    overflow : clip;
+    contain : paint;
+
+    min-width : 100%;
+    height : 100%;
+}
+.window #windowbody .advanced-control-canvas {
+    display : block;
+    position : absolute;
+    z-index : 0;
+
+    pointer-events : none; /* Allows user to interact with html behind it */
+
+    background : transparent;
+}
+
+
+/* WIDGET STYLING */
+.advanced-control-board .widget {
+    display : block;
+    position : absolute;
+    overflow : hidden;
+
+    border-radius : 0.5em;
+
+    box-shadow : 5px 5px 6px 6px rgba(0, 0, 0, 0.2);
+
+    background : var(--ui-outline);
+}
+.widget #widgetheader{
+    display : block;
+
+    min-width : fit-content;
+    padding : 0.25em;
+
+    color : white;
+    background : rgba(255, 255, 255, 0.1);
+}
+.widget #widgetheader .widget-delete {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    position : absolute;
+
+    top : 2px;
+    right : 2px;
+    width : 1.5em;
+    height : 1.5em;
+
+    border : none;
+
+    font-size : 1em;
+    color : white;
+    background : transparent;
+
+    transition : color 0.5s;
+}
+.widget #widgetheader .widget-delete:hover {
+    color : rgba(255, 255, 255, 0.5);
+    cursor : pointer;
+}
+.widget #widgetbody {
+    display : flex;
+    flex-direction : row;
+    padding : 1em;
+
+    color : white;
+}
+.widget .field-name {
+    display : block;
+    position : relative;
+    box-sizing : border-box;
+
+    padding-left : 0.25em;
+    padding-right : 0.25em;
+    border-radius : 0.25em;
+    margin-left : 0.25em;
+
+    color : white;
+    background : rgba(48, 49, 55, 0.7);
+}
+.widget .output-button {
+    display : block;
+    position : fixed;
+
+    border : none;
+
+    text-align : center;
+    font-size : 1em;
+    color : white;
+    background : transparent;
+    
+    transition : color 0.5s;
+}
+.widget .output-button:hover {
+    color : rgba(255, 255, 255, 0.5);
+}
+.widget input {
+    width : 8em;
+}
+.widget input[type='checkbox'], input[type='text'] {
+    width : auto;
+}
+.widget .input-resize {
+    width : fit-content;
+}
+.widget #additional .wrapper {
+    display : flex;
+    flex-wrap : nowrap;
+}
