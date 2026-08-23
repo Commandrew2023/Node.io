@@ -44,7 +44,12 @@
             id : 'title',
             children : [
               {type : 'span', id : 'titletext', html : this.message.title},
-              {type : 'span', id : 'titlebtn', classes : ['material-symbols-outlined'], html : 'close'}
+              {type : 'span', id : 'titlebtn', classes : ['material-symbols-outlined'], html : 'close', events : [{
+                type : 'click',
+                callback : (e) => {
+                  Flats.Popups[0].remove();
+                }
+              }]}
             ]
           },
           {
