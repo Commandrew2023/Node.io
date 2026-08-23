@@ -7,9 +7,10 @@
                 if (!response.ok) {
                     reject(response);
                     throw new Error(`Error loading js file: ${path}`);
-                } else {
-                    resolve(response);
                 }
+
+                const text = response.text();
+                resolve(text);
             }
         ).then((res) => {
             console.log(res);
