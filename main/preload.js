@@ -1,25 +1,30 @@
 (function (module) {
-    module.root = `https://cdn.jsdelivr.net/gh/Commandrew2023/Node.io@main/`;
-    module.requestJS = (path) => {
-        return new Promise(
-            async (resolve, reject) => {
-                const response = await fetch(`module.root${path}`);
-                if (!response.ok) {
-                    reject(response);
-                    throw new Error(`Error loading js file: ${path}`);
-                }
-
-                const text = await response.text();
-                resolve(text);
-            }
-        ).then((res) => {
-            console.log(res);
-        });
-    };
-    module.loadRequests = () => {
-        module.requests.forEach(request => module.requestJS(request));
-    };
-    module.requests = [
+    module.__root = `https://cdn.jsdelivr.net/gh/Commandrew2023/Node.io@latest/`;
+    module.__requests = [
         "main/index.js"
     ];
+    module.__generateRequests = () => {
+        module.__requests.forEach(request => {
+            let script = document.createElement('script');
+            script.src = `${module.__root}${request}`;
+            script.setAttribute('request', request);
+            script.addEventListener('load', (e) => {
+                let request = e.currentTarget.getAttribute('request');
+                module.__requests[request] = {
+                    "url" : e.currentTarget.src,
+                    "request" : request,
+                    "complete" : true
+                };
+            });
+            document.head.appendChild(script);
+        });
+    };
+    module.__checkRequests = setInterval(() => {
+        let passes = false;
+        module.__requests.forEach(request => {
+            if (typeof request !== 'string') {
+                console.log(request);
+            }
+        });
+    }, 0);
 })(this);
