@@ -1,5 +1,7 @@
 (function () {
   class Popup {
+    #currentStep;
+    #updateLoop;
     constructor (title, body) {
       this.DOM_Element = null;
 
