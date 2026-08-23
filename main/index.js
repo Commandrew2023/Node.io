@@ -1,10 +1,10 @@
 (function (module) {
 	module.canvasWrapper = document.querySelector("#canvas");
-	module.dims = canvasWrapper.getBoundingClientRect();
+	module.dims = module.canvasWrapper.getBoundingClientRect();
 	
 	module.canvas = document.querySelector("#draw-canvas");
-	module.canvas.width = dims.width;
-	module.canvas.height = dims.height;
+	module.canvas.width = module.dims.width;
+	module.canvas.height = module.dims.height;
 	module.ctx = canvas.getContext('2d');
 	
 	// Code written by Gemini but modified to fit my needs {
