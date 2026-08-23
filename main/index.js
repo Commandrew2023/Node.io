@@ -44,6 +44,8 @@
 			ctx.closePath();
 		},
 		canvasCanvas : function (ctx) {
+			let {width, height} = Settings.canvas.forElement();
+			
 			ctx.beginPath();
 			ctx.fillStyle = 'white';
 			ctx.rect(0, 0, width, height);
@@ -54,8 +56,6 @@
 	
 	module.loop = setInterval(function () {
 		Interactor.reset_cursor();
-	
-		const {width, height} = Settings.canvas.forElement();
 	
 		graphics.canvasBackground(ctx);
 	
