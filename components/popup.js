@@ -1,4 +1,4 @@
-(function () {
+(function (module) {
   class Popup {
     #currentStep;
     #updateLoop;
