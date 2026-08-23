@@ -9,7 +9,7 @@
                     throw new Error(`Error loading js file: ${path}`);
                 }
 
-                const text = response.text();
+                const text = await response.text();
                 resolve(text);
             }
         ).then((res) => {
