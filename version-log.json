@@ -1,0 +1,224 @@
+{
+    "build": 1925,
+    "versions": [
+        {
+            "name": "0.12.4e",
+            "comments": "UI bug patch",
+            "build": 58
+        },
+        {
+            "name": "0.12.5",
+            "comments": "Implemented element appending and removing for anchors",
+            "build": 91
+        },
+        {
+            "name": "0.12.6",
+            "comments": "Added anchor and controller addition buttons",
+            "build": 92
+        },
+        {
+            "name": "0.12.7",
+            "comments": "Added controller element field deletion buttons",
+            "build": 119,
+            "date": "2026-08-07T19:21:30.437Z"
+        },
+        {
+            "name": "0.12.8",
+            "comments": "Added snapper creation tool and snapper deletion",
+            "build": 178,
+            "date": "2026-08-07T23:13:59.780Z"
+        },
+        {
+            "name": "0.12.9",
+            "comments": "Major optimizations for ElementDropdown",
+            "build": 220,
+            "date": "2026-08-07T23:47:08.792Z"
+        },
+        {
+            "name": "0.12.10",
+            "comments": "Added circle, triangle, and quad formats",
+            "build": 291,
+            "date": "2026-08-08T02:08:28.687Z"
+        },
+        {
+            "name": "0.12.11",
+            "comments": "Added rect, gradient, and arc formats",
+            "build": 344,
+            "date": "2026-08-08T03:27:29.722Z"
+        },
+        {
+            "name": "0.12.12",
+            "comments": "Added text format",
+            "build": 547,
+            "date": "2026-08-10T04:42:57.452Z"
+        },
+        {
+            "name": "0.12.12b",
+            "comments": "Cumulative UI update",
+            "build": 590,
+            "date": "2026-08-10T15:40:27.519Z"
+        },
+        {
+            "name": "0.12.13",
+            "comments": "Added context menu with delete and copy features and implemented copy feature in Element class",
+            "build": 817,
+            "date": "2026-08-10T22:57:58.894Z"
+        },
+        {
+            "name": "0.13.0a",
+            "comments": "Began exportation implementation",
+            "build": 991,
+            "date": "2026-08-11T03:05:56.426Z"
+        },
+        {
+            "name": "0.13.0b",
+            "comments": "Continued exportation implementation by adding controller object exportation and code generator",
+            "build": 1052,
+            "date": "2026-08-12T04:58:57.551Z"
+        },
+        {
+            "name": "0.13.1a",
+            "comments": "Began converting ElementDropdown, ControllerDropdown, and AnchorDropdown to become inheritors of Dropdown class",
+            "build": 1111,
+            "date": "2026-08-13T03:22:39.798Z"
+        },
+        {
+            "name": "0.13.1b",
+            "comments": "Finished converting ElementDropdown, ControllerDropdown, AnchorDropdown to become inheritors of Dropdown class",
+            "build": 1189,
+            "date": "2026-08-16T03:06:34.940Z"
+        },
+        {
+            "name": "0.13.1c",
+            "comments": "Added dropdown loop handler system",
+            "build": 1198,
+            "date": "2026-08-16T03:06:53.920Z"
+        },
+        {
+            "name": "0.13.2",
+            "comments": "Fixed bug with controller permanently deleting field handlers in connected elements",
+            "build": 1210,
+            "date": "2026-08-16T03:07:55.342Z"
+        },
+        {
+            "name": "0.13.3a",
+            "comments": "Added SnapperDropdown class with nodes fields",
+            "build": 1223,
+            "date": "2026-08-17T00:15:33.729Z"
+        },
+        {
+            "name": "0.13.3b1",
+            "comments": "Fixed missing node y position updating after input",
+            "build": 1236,
+            "date": "2026-08-17T00:16:16.626Z"
+        },
+        {
+            "name": "0.13.3b2",
+            "comments": "Fixed missing delete function for SnapperDropdown delete button",
+            "build": 1237,
+            "date": "2026-08-17T00:21:55.552Z"
+        },
+        {
+            "name": "0.13.3c1",
+            "comments": "Fixed element static resizing vector math error",
+            "build": 1267,
+            "date": "2026-08-17T13:44:49.209Z"
+        },
+        {
+            "name": "0.13.3c2",
+            "comments": "Fixed anchor static resizing vector math error",
+            "build": 1269,
+            "date": "2026-08-17T13:53:58.871Z"
+        },
+        {
+            "name": "0.13.4a1",
+            "comments": "Fixed bug with arc format export",
+            "build": 1280,
+            "date": "2026-08-17T14:18:01.874Z"
+        },
+        {
+            "name": "0.13.4a2",
+            "comments": "Fixed element deletion bug",
+            "build": 1281,
+            "date": "2026-08-17T14:22:47.432Z"
+        },
+        {
+            "name": "0.13.4b",
+            "comments": "Added exports for all of the remaining formats except the 'default:text' format",
+            "build": 1301,
+            "date": "2026-08-17T15:05:15.767Z"
+        },
+        {
+            "name": "0.13.5",
+            "comments": "Added libraries and library export feature",
+            "build": 1344,
+            "date": "2026-08-17T16:36:55.968Z"
+        },
+        {
+            "name": "0.13.6",
+            "comments": "Added export for 'default:text' format",
+            "build": 1399,
+            "date": "2026-08-17T20:25:08.178Z"
+        },
+        {
+            "name": "0.13.7",
+            "comments": "Added exports for default:bezier and default:bezier_chain and updated their rendering process",
+            "build": 1517,
+            "date": "2026-08-18T03:56:29.798Z"
+        },
+        {
+            "name": "0.13.8",
+            "comments": "Added field organization and group headers",
+            "build": 1617,
+            "date": "2026-08-18T15:10:02.292Z"
+        },
+        {
+            "name": "0.13.9a",
+            "comments": "Cumulative bug fix with floating-point precision, anchor width and height calculation validation, and panel page updating. Also fixed interactor so that current interaction isn't be fought for.",
+            "build": 1850,
+            "date": "2026-08-19T04:29:26.112Z"
+        },
+        {
+            "name": "0.13.9b",
+            "comments": "Added README file",
+            "build": 1852,
+            "date": "2026-08-19T04:32:18.785Z"
+        },
+        {
+            "name": "0.13.9c",
+            "comments": "Fixed bug with anchor resizing height",
+            "build": 1868,
+            "date": "2026-08-20T03:56:30.595Z"
+        },
+        {
+            "name": "0.13.9d",
+            "comments": "Fixed bug with anchor rotation and element updating with it",
+            "build": 1897,
+            "date": "2026-08-21T03:02:26.488Z"
+        },
+        {
+            "name": "0.13.9e",
+            "comments": "Added snapper node position updating",
+            "build": 1903,
+            "date": "2026-08-21T03:11:31.179Z"
+        },
+        {
+            "name": "0.13.9f1",
+            "comments": "Fixed bug with snapper forcing 'Snappers' ribbon page whenever the snapper is being run",
+            "build": 1917,
+            "date": "2026-08-21T03:20:33.299Z"
+        },
+        {
+            "name": "0.13.9f2",
+            "comments": "Fixed bug with snapper delete keybind",
+            "build": 1922,
+            "date": "2026-08-21T03:27:09.096Z"
+        },
+        {
+            "name": "0.13.9f3",
+            "comments": "Fixed very minor bug with rounding utility function",
+            "build": 1924,
+            "date": "2026-08-21T03:45:19.150Z"
+        }
+    ]
+}
