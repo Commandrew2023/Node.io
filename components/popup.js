@@ -42,7 +42,10 @@
           {
             type : 'div',
             id : 'title',
-            html : this.message.title,
+            children : [
+              {type : 'span', id : 'titletext', html : this.message.title},
+              {type : 'span', id : 'titlebtn', classes : ['material-symbols-outlined'], html : 'close'}
+            ]
           },
           {
             type : 'div',
