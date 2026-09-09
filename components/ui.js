@@ -113,7 +113,6 @@
 
             // Reset controller element addition
             Interactor.controller.adding.isActive = false;
-            
         },
         openController : function () {
             const controllerEl = document.querySelector("#controller");
