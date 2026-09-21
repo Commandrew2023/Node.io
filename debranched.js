@@ -8349,8 +8349,16 @@
                 let button_name = btn.getAttribute('name');
                 if (!Boolean(btn.getAttribute('hasevent')) || 1) {
                     btn.setAttribute('hasevent', true);
-                    let newBtn = btn.cloneNode(true);
-                    btn.replaceWith(newBtn);
+                    btn.onclick = null;
+                    btn.onmouseenter = null;
+
+                    // Or programmatically strip any attribute starting with "on"
+                    [...btn.attributes].forEach(attr => {
+                      if (attr.name.startsWith("on")) {
+                        btn.removeAttribute(attr.name);
+                      }
+                    });
+                    
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
