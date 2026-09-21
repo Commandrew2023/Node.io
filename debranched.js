@@ -8347,9 +8347,9 @@
             const buttons = document.querySelectorAll('.rbutton');
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name');
-                //console.log(btn.getAttribute('hasevent'), Boolean(btn.getAttribute('hasevent')));
+                console.log(btn.getAttribute('hasevent'), Boolean(btn.getAttribute('hasevent')));
                 if (btn.getAttribute('hasevent') === null) {
-                    //console.log('Added to ' + button_name);
+                    console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
