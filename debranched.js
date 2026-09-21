@@ -8349,6 +8349,8 @@
                 let button_name = btn.getAttribute('name');
                 if (!Boolean(btn.getAttribute('hasevent')) || 1) {
                     btn.setAttribute('hasevent', true);
+                    let newBtn = btn.cloneNode(true);
+                    btn.replaceWith(newBtn);
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
