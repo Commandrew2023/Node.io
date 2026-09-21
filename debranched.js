@@ -8347,23 +8347,15 @@
             const buttons = document.querySelectorAll('.rbutton');
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name');
-                if (!Boolean(btn.getAttribute('hasevent')) || 1) {
-                    btn.setAttribute('hasevent', true);
-                    btn.onclick = null;
-                    btn.onmouseenter = null;
-
-                    // Or programmatically strip any attribute starting with "on"
-                    [...btn.attributes].forEach(attr => {
-                      if (attr.name.startsWith("on")) {
-                        btn.removeAttribute(attr.name);
-                      }
-                    });
-                    
+                if (!Boolean(btn.getAttribute('hasevent'))) {
+                    console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
+
+                    btn.setAttribute('hasevent', true);
                 }
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
