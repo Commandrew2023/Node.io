@@ -10818,12 +10818,12 @@ triangle(${vertices.join(', ')});`;
     }
     // }
     
-    function CreateAnchor () {
+    module.CreateAnchor = function CreateAnchor () {
     	let anchor = new Anchor(200, 200);
     	anchor.addDropdown();
     	Flats.Anchors.push(anchor);
     }
-    function CreateController () {
+    module.CreateController = function CreateController () {
     	let controller = new Controller();
     	controller.addDropdown();
     	Flats.Controllers.push(controller);
