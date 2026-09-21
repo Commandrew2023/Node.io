@@ -8310,7 +8310,17 @@
     }
     module.SnapperDropdown = SnapperDropdown;
 
-
+    module.CreateAnchor = function CreateAnchor () {
+    	let anchor = new Anchor(200, 200);
+    	anchor.addDropdown();
+    	Flats.Anchors.push(anchor);
+    }
+    module.CreateController = function CreateController () {
+    	let controller = new Controller();
+    	controller.addDropdown();
+    	Flats.Controllers.push(controller);
+    }
+    
     module.UI = {
         __update_canvas_flag : true,
         setUpdateCanvasFlag : function () {
@@ -10817,17 +10827,6 @@ triangle(${vertices.join(', ')});`;
       	}, { offset: Number.NEGATIVE_INFINITY }).element;
     }
     // }
-    
-    module.CreateAnchor = function CreateAnchor () {
-    	let anchor = new Anchor(200, 200);
-    	anchor.addDropdown();
-    	Flats.Anchors.push(anchor);
-    }
-    module.CreateController = function CreateController () {
-    	let controller = new Controller();
-    	controller.addDropdown();
-    	Flats.Controllers.push(controller);
-    }
     
     let loop = setInterval(function () {
     	Interactor.reset_cursor();
