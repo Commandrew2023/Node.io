@@ -3423,44 +3423,6 @@
             /* Assign to self */
             this.DOM_Element = Main;
 
-            /*this.DOM_Element.addEventListener('click', (e) => {
-                let window = module.Flats.get.window(e.currentTarget.getAttribute('window-uuid'));
-                if (window) {
-
-                    
-                    let widget = window.getWidget(e.currentTarget.getAttribute('widget-uuid'));
-
-                    if (widget.inputNodes.length > 0) {
-                        if (widget.inputNodes[0].payload.length === 0) {
-                            widget.inputNodes[0].payload.push([{
-                                value : 123.456,
-                                type : 'number',
-                                field : 'Pivot-X',
-                                source : {}
-                            },
-                            {
-                                value : 5,
-                                type : 'number',
-                                field : 'Pivot-Y',
-                                source : {}
-                            }]);
-                        }
-                        if (widget.inputNodes[1] !== undefined) {
-                            if (widget.inputNodes[1].payload.length === 0) {
-                                widget.inputNodes[1].payload.push([{
-                                    value : 6,
-                                    type : 'number',
-                                    field : null,
-                                    source : {}
-                                }]);
-                            }
-                        }
-                    }
-
-                    console.log(widget.function());
-                }
-            });*/
-
             /* Add element to window board section */
             this.window.board.appendChild(Main);
             
@@ -8345,13 +8307,15 @@
             },
             'anchor-add' : {
                 click : function () {
-                    CreateAnchor()
+                    console.log('Creating Anchor');
+                    module.CreateAnchor()
                 },
                 update : function () {}
             },
             'controller-add' : {
                 click : function () {
-                    CreateController()
+                    console.log('Creating Anchor');
+                    module.CreateController()
                 },
                 update : function () {}
             },
@@ -8386,6 +8350,7 @@
                 if (!Boolean(btn.getAttribute('hasevent'))) {
                     btn.setAttribute('hasevent', true);
                     btn.addEventListener('click', e => {
+                        console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
