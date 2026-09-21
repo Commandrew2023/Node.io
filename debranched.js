@@ -8346,9 +8346,8 @@
         updateRibbonButtons : function () {
             const buttons = document.querySelectorAll('.rbutton');
             [...buttons].forEach(btn => {
-                console.log(1);
                 let button_name = btn.getAttribute('name');
-                if (!Boolean(btn.getAttribute('hasevent'))) {
+                if (!Boolean(btn.getAttribute('hasevent')) || 1) {
                     btn.setAttribute('hasevent', true);
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
