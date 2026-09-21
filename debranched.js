@@ -8347,8 +8347,8 @@
             const buttons = document.querySelectorAll('.rbutton');
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name');
-                console.log(btn.getAttribute('hasevent'));
-                if (!Boolean(btn.getAttribute('hasevent'))) {
+                //console.log(btn.getAttribute('hasevent'));
+                if (Boolean(btn.getAttribute('hasevent'))) {
                     console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         console.log('Testing Button Point');
@@ -8356,7 +8356,7 @@
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
 
-                    //btn.setAttribute('hasevent', true);
+                    btn.setAttribute('hasevent', false);
                 }
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
