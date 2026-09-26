@@ -10322,7 +10322,7 @@ triangle(${vertices.join(', ')});`;
     
     /* EVENT HANDLERS FOR LEFT & RIGHT PANEL BUTTONS */
     (function () {
-        const openPanelLeft = document.querySelector(".panel-button[side='left']");
+        /**const openPanelLeft = document.querySelector(".panel-button[side='left']");
         openPanelLeft.addEventListener('click', (e) => {
             const panesEl = document.querySelector("#panes");
             UI.panes.open = !UI.panes.open;
@@ -10334,8 +10334,8 @@ triangle(${vertices.join(', ')});`;
                 panesEl.setAttribute('open', false);
                 openPanelLeft.innerHTML = `<span class='material-symbols-outlined'>arrow_forward</span>`;
             }
-        });
-        const openPanelRight = document.querySelector(".panel-button[side='right']");
+        });**/
+        /*const openPanelRight = document.querySelector(".panel-button[side='right']");
         openPanelRight.addEventListener('click', (e) => {
             const controllerEl = document.querySelector("#controller");
             UI.controller.open = !UI.controller.open;
@@ -10347,7 +10347,7 @@ triangle(${vertices.join(', ')});`;
                 controllerEl.setAttribute('open', false);
                 openPanelRight.innerHTML = `<span class='material-symbols-outlined'>arrow_back</span>`;
             }
-        });
+        });*/
     })();
     
     /* HANDLING PANEL DROPDOWNS */
@@ -10639,17 +10639,10 @@ triangle(${vertices.join(', ')});`;
     
         canvasEl.style.width = '100%';
         let cw = 0, pw = 0, c100vw = canvasEl.getBoundingClientRect().width, c100vh = canvasEl.getBoundingClientRect().height, min = 356;
-        if (UI.panes.open) {
-          pw = 1;
-        }
-        if (UI.controller.open) {
-          cw = 1;
-        }
-        //console.log(c100vh);
-        let r = c100vw - (pw + cw) * Math.max(min, 0.2 * c100vw);
+        let r = c100vw - Math.max(min, 0.2 * c100vw);
         canvasEl.style.width = `${r}px`;
         controllerEl.style.width = `${cw * Math.max(min, 0.2 * c100vw)}px`;
-        panesEl.style.width = `${pw * Math.max(min, 0.2 * c100vw)}px`;
+        //panesEl.style.width = `${pw * Math.max(min, 0.2 * c100vw)}px`;
         //console.log(canvasEl.style.width, controllerEl.style.width, panesEl.style.width);
     }
     function UpdateCanvas () {
