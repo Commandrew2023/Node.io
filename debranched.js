@@ -8348,13 +8348,8 @@
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name'),
                     hasEvent = btn.getAttribute('hasevent');
-                console.log(hasEvent, Boolean(hasEvent));
                 if (hasEvent === null || hasEvent === 'null') {
-                    console.log('Is Null');
-                    console.log(btn);
                     btn.addEventListener('click', e => {
-                        alert("testing");
-                        //console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
@@ -10642,10 +10637,17 @@ triangle(${vertices.join(', ')});`;
               canvasEl = document.querySelector("#canvas"),
               canvas = canvasEl.querySelector('canvas');
     
-        let w = 100;
-        if (UI.panes.open) w -= 20;
-        if (UI.controller.open) w -= 20;
-        canvasEl.style.width = w + 'vw';
+        let cw = 0, pw = 0, c100vw = canvasEl.getBoundingClientRect().width, min = 356;
+        if (UI.panes.open) {
+          pw = 1;
+        }
+        if (UI.controller.open) {
+          cw = 1;
+        }
+        let r = c100vw - (pw + cw) * Math.max(min, 0.2 * c100vw);
+        canvasEl.style.width = `${r}px`;
+        controllerEl.style.width = `${cw * Math.max(min, 0.2 * c100vw)}px`;
+        panesEl.style.width = `${pw * Math.max(min, 0.2 * c100vw)}px`;
     }
     function UpdateCanvas () {
         if (UI.__update_canvas_flag) {
