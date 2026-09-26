@@ -8348,16 +8348,16 @@
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name'),
                     hasEvent = btn.getAttribute('hasevent');
-                //console.log(hasEvent, Boolean(hasEvent));
-                if (hasEvent === 'true' || hasEvent === null) {
-                    console.log('Added to ' + button_name);
+                console.log(hasEvent, Boolean(hasEvent));
+                if (hasEvent === null) {
+                    //console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         //console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
 
-                    btn.setAttribute('hasevent', 'false');
+                    btn.setAttribute('hasevent', true);
                 }
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
