@@ -8348,11 +8348,11 @@
             [...buttons].forEach(btn => {
                 let button_name = btn.getAttribute('name'),
                     hasEvent = btn.getAttribute('hasevent');
-                console.log(hasEvent, Boolean(hasEvent));
+                //console.log(hasEvent, Boolean(hasEvent));
                 if (hasEvent === 'true' || hasEvent === null) {
                     console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
-                        console.log('Testing Button Point');
+                        //console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });
@@ -8416,9 +8416,11 @@
             openPanelRight.innerHTML = `<span class='material-symbols-outlined'>arrow_forward</span>`;
         },
     };
-    setInterval(() => {
-        module.UI.updateRibbonButtons();
-    }, 1);
+    document.addEventListener('DOMContentLoaded', () => {
+        setInterval(() => {
+            module.UI.updateRibbonButtons();
+        }, 1);
+    });
 
 })(this);
 
