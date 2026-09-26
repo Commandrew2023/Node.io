@@ -8360,7 +8360,7 @@
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });*/
 
-                    //btn.setAttribute('hasevent', true);
+                    btn.setAttribute('hasevent', true);
                 }
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
