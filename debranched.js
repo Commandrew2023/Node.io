@@ -8349,8 +8349,9 @@
                 let button_name = btn.getAttribute('name'),
                     hasEvent = btn.getAttribute('hasevent');
                 console.log(hasEvent, Boolean(hasEvent));
-                if (hasEvent === null) {
+                if (hasEvent === null || hasEvent === 'null') {
                     console.log('Is Null');
+                    console.log(btn);
                     /*console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         alert("testing");
@@ -8359,7 +8360,7 @@
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
                     });*/
 
-                    btn.setAttribute('hasevent', true);
+                    //btn.setAttribute('hasevent', true);
                 }
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
@@ -8421,7 +8422,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         setInterval(() => {
             module.UI.updateRibbonButtons();
-        }, 1);
+        }, 1000);
     });
 
 })(this);
