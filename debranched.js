@@ -8349,14 +8349,15 @@
                 let button_name = btn.getAttribute('name'),
                     hasEvent = btn.getAttribute('hasevent');
                 console.log(hasEvent, Boolean(hasEvent));
-                /*if (hasEvent === null) {
-                    console.log('Added to ' + button_name);
+                if (hasEvent === null) {
+                    console.log('Is Null');
+                    /*console.log('Added to ' + button_name);
                     btn.addEventListener('click', e => {
                         alert("testing");
                         //console.log('Testing Button Point');
                         let name = e.currentTarget.getAttribute('name');
                         this.ribbonButtonHandlers[name].click(e.currentTarget);
-                    });
+                    });*/
 
                     btn.setAttribute('hasevent', true);
                 }
