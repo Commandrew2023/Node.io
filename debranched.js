@@ -10637,6 +10637,7 @@ triangle(${vertices.join(', ')});`;
               canvasEl = document.querySelector("#canvas"),
               canvas = canvasEl.querySelector('canvas');
     
+        canvasEl.style.width = '100vw';
         let cw = 0, pw = 0, c100vw = canvasEl.getBoundingClientRect().width, min = 356;
         if (UI.panes.open) {
           pw = 1;
@@ -10648,6 +10649,7 @@ triangle(${vertices.join(', ')});`;
         canvasEl.style.width = `${r}px`;
         controllerEl.style.width = `${cw * Math.max(min, 0.2 * c100vw)}px`;
         panesEl.style.width = `${pw * Math.max(min, 0.2 * c100vw)}px`;
+        console.log(canvasEl.style.width, controllerEl.style.width, panesEl.style.width);
     }
     function UpdateCanvas () {
         if (UI.__update_canvas_flag) {
