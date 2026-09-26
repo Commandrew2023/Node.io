@@ -8361,7 +8361,7 @@
 
                     btn.setAttribute('hasevent', true);
                 }
-                this.ribbonButtonHandlers[button_name].update(btn);*/
+                this.ribbonButtonHandlers[button_name].update(btn);
             });
         },
         selectRibbon : function (name) {
