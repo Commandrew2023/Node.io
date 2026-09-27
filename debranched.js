@@ -10637,11 +10637,11 @@ triangle(${vertices.join(', ')});`;
               canvasEl = document.querySelector("#canvas"),
               canvas = canvasEl.querySelector('canvas');
     
-        canvasEl.style.width = '100%';
+        /*canvasEl.style.width = '100%';
         let cw = 0, pw = 0, c100vw = canvasEl.getBoundingClientRect().width, c100vh = canvasEl.getBoundingClientRect().height, min = 356;
         let r = c100vw - Math.max(min, 0.2 * c100vw);
         canvasEl.style.width = `${r}px`;
-        controllerEl.style.width = `${cw * Math.max(min, 0.2 * c100vw)}px`;
+        controllerEl.style.width = `${cw * Math.max(min, 0.2 * c100vw)}px`;*/
         //panesEl.style.width = `${pw * Math.max(min, 0.2 * c100vw)}px`;
         //console.log(canvasEl.style.width, controllerEl.style.width, panesEl.style.width);
     }
@@ -10654,7 +10654,7 @@ triangle(${vertices.join(', ')});`;
                 cdims = Settings.canvas.forElement();
     
             canvas.width = dims.width + 20;
-            canvas.height = dims.height + 16;
+            canvas.height = dims.height + 8/* + 16*/;
             Camera.offset.x = ((dims.width + 20) / 2) - (cdims.width / 2);
             Camera.offset.y = ((dims.height + 16) / 2) - (cdims.height / 2);
             Camera.mouseRef = {
