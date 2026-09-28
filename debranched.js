@@ -40,29 +40,29 @@
     }
     module.AlternativeCrypto = AlternativeCrypto;
 
-    module.dragElement = function dragElement(elmnt) {
+    module.dragElement = function (elmnt) {
       var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
       
       if (elmnt.querySelector(`#${elmnt.id}header`)) {
         // if present, the header is where you move the DIV from:
-        elmnt.querySelector(`#${elmnt.id}header`).onmousedown = dragMouseDown;
+        elmnt.querySelector(`#${elmnt.id}header`).onmousedown = module.dragMouseDown;
       }/* else {
         // otherwise, move the DIV from anywhere inside the DIV:
         elmnt.onmousedown = dragMouseDown;
       }*/
     
-      function dragMouseDown(e) {
+      module.dragMouseDown = function (e) {
         e = e || window.event;
         e.preventDefault();
         // get the mouse cursor position at startup:
         pos3 = e.clientX;
         pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
+        document.onmouseup = module.closeDragElement;
         // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
+        document.onmousemove = module.elementDrag;
       }
     
-      function elementDrag(e) {
+      module.elementDrag = function (e) {
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
@@ -75,7 +75,7 @@
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
       }
     
-      function closeDragElement() {
+        module.closeDragElement = function () {
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
@@ -389,7 +389,7 @@
                 ]
             });
             this.DOM_Body = this.DOM_Window.querySelector('#windowbody');
-            dragElement(this.DOM_Window);
+            module.dragElement(this.DOM_Window);
 
             document.querySelector('body').appendChild(this.DOM_Window);
         }
@@ -3430,7 +3430,7 @@
             this.ctx = this.window.canvas.getContext('2d');
 
             /* Make element draggable */
-            dragElement(Main);
+            module.dragElement(Main);
         }
         update () {
             /* Output */
@@ -6373,7 +6373,7 @@
 
                         container.addEventListener('dragover', (e) => {
                             e.preventDefault();
-                            const afterElement = getDragAfterElement(e.currentTarget, e.clientY);
+                            const afterElement = module.getDragAfterElement(e.currentTarget, e.clientY);
                             if (afterElement == null) {
                                 e.currentTarget.appendChild(Interactor.draggedItem.element);
                             } else {
@@ -8251,7 +8251,7 @@
 
                         container.addEventListener('dragover', (e) => {
                             e.preventDefault();
-                            const afterElement = getDragAfterElement(e.currentTarget, e.clientY);
+                            const afterElement = module.getDragAfterElement(e.currentTarget, e.clientY);
                             if (afterElement == null) {
                                 e.currentTarget.appendChild(Interactor.draggedItem.element);
                             } else {
@@ -8343,19 +8343,20 @@
             else 
                 btn.setAttribute('toggled', `${!state}`);
         },
+        addRibbonButtonFunctions : function () {
+            const buttons = document.querySelectorAll('.rbutton');
+            [...buttons].forEach(btn => {
+                let button_name = btn.getAttribute('name');
+                btn.addEventListener('click', e => {
+                    let name = e.currentTarget.getAttribute('name');
+                    this.ribbonButtonHandlers[name].click(e.currentTarget);
+                });
+            });
+        },
         updateRibbonButtons : function () {
             const buttons = document.querySelectorAll('.rbutton');
             [...buttons].forEach(btn => {
-                let button_name = btn.getAttribute('name'),
-                    hasEvent = btn.getAttribute('hasevent');
-                if (hasEvent === null || hasEvent === 'null') {
-                    btn.addEventListener('click', e => {
-                        let name = e.currentTarget.getAttribute('name');
-                        this.ribbonButtonHandlers[name].click(e.currentTarget);
-                    });
-
-                    btn.setAttribute('hasevent', true);
-                }
+                let button_name = btn.getAttribute('name');
                 this.ribbonButtonHandlers[button_name].update(btn);
             });
         },
@@ -8417,6 +8418,7 @@
         setInterval(() => {
             module.UI.updateRibbonButtons();
         }, 1000);
+        module.UI.addRibbonButtonFunctions();
     });
 
 })(this);
@@ -10439,7 +10441,7 @@ triangle(${vertices.join(', ')});`;
     
                 container.addEventListener('dragover', (e) => {
                     e.preventDefault();
-                    const afterElement = getDragAfterElement(e.currentTarget, e.clientY);
+                    const afterElement = module.getDragAfterElement(e.currentTarget, e.clientY);
                     if (afterElement == null) {
                         e.currentTarget.appendChild(Interactor.draggedItem.element);
                     } else {
@@ -10784,7 +10786,7 @@ triangle(${vertices.join(', ')});`;
     
     // Code written by Gemini but modified to fit my needs {
     Interactor.draggedItem.element = null;
-    function getDragAfterElement(container, y) {
+    module.getDragAfterElement = function (container, y) {
       	const draggableElements = [...container.querySelectorAll('.drag-item:not(.dragging)')];
     
       	return draggableElements.reduce((closest, child) => {
