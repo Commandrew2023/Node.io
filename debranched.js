@@ -40,46 +40,44 @@
     }
     module.AlternativeCrypto = AlternativeCrypto;
 
-    module.dragElement = function (elmnt) {
-      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      
-      if (elmnt.querySelector(`#${elmnt.id}header`)) {
-        // if present, the header is where you move the DIV from:
-        elmnt.querySelector(`#${elmnt.id}header`).onmousedown = module.dragMouseDown;
-      }/* else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        elmnt.onmousedown = dragMouseDown;
-      }*/
+    module.dragElement = function (el) {
+        const elmnt = el;
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        
+        function dragMouseDown (e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+        
+        function elementDrag (e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
     
-      module.dragMouseDown = function (e) {
-        e = e || window.event;
-        e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = module.closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = module.elementDrag;
-      }
-    
-      module.elementDrag = function (e) {
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-      }
-    
-        module.closeDragElement = function () {
-        // stop moving when mouse button is released:
-        document.onmouseup = null;
-        document.onmousemove = null;
-      }
+        function closeDragElement () {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+        if (elmnt.querySelector(`#${elmnt.id}header`)) {
+            // if present, the header is where you move the DIV from:
+            elmnt.querySelector(`#${elmnt.id}header`).onmousedown = dragMouseDown;
+        }
     }
 
     module.HTML_Build = function (struct) {
@@ -715,7 +713,7 @@
     }
     module.Dropdown = Dropdown;
     
-  class Anchor {
+    class Anchor {
         constructor (x, y) {
             /* ID generation checked against other anchors */
             this.uuid = module.AlternativeCrypto.randomUUID({
@@ -2703,9 +2701,10 @@
             };
         }
         create () {
+            module.Interactor.widget.index++;
 
             /* Create widget element */
-            const Main = HTML_Build({
+            let Main = HTML_Build({
                 type : 'div',
                 id : 'widget',
                 classes : ['widget'],
@@ -2716,7 +2715,7 @@
                 children : [
                     {
                         type : 'div',
-                        id : 'widgetheader',
+                        id : `widgetheader`,
                         html : this.type,
                         children : [
                             {
@@ -2743,6 +2742,9 @@
                     }
                 ]
             });
+
+            /* Make element draggable */
+            module.dragElement(Main);
 
             /* Reference the widget body */
             let body = Main.querySelector('#widgetbody');
@@ -3428,9 +3430,6 @@
             
             /* Cache the canvas context */
             this.ctx = this.window.canvas.getContext('2d');
-
-            /* Make element draggable */
-            module.dragElement(Main);
         }
         update () {
             /* Output */
@@ -6657,19 +6656,39 @@
             }
             return vars;
         },
-        compileProject : function () {
+        compileProject : function (excludeLibraries) {
             this.__reset();
             this.__preloadLibraries();
             this.__preloadFormatVariables();
             this.__preloadControllerDependencies();
             this.__preloadControllerData();
 
-            this.exportLibraries();
+            if (!excludeLibraries) {
+                this.exportLibraries();
+            }
             this.exportControllers();
 
             module.Flats.Elements.forEach(element => {
                 this.__accumulator.code += this.exportElement(element) + '\n';
             });
+
+
+            /*let htmlify = this.__accumulator.code.replaceAll('\n', '<br>').replaceAll('\t', );*/
+            let win = new module.Window();
+            win.name = 'Exportation View'
+            win.build();
+            /*win.DOM_Body.style.paddingRight = '32px';*/
+            win.DOM_Body.appendChild(module.HTML_Build({
+                type : 'textarea',
+                html : this.__accumulator.code,
+                style : {
+                    width : '100%',
+                    height : '100%',
+                    marginTop : '-16px'
+                }
+            }));
+            win.resize(600, 600);
+            module.Flats.Windows.push(win);
 
             console.log(this.__accumulator.code);
         }
@@ -7105,6 +7124,9 @@
                 case 'snapper':
                     this.snapper.uuid = uuid;
                 break;
+                case 'controller':
+                    this.controller.uuid = uuid;
+                break;
             }
         },
         reset : function () {
@@ -7356,6 +7378,7 @@
             }
         },
         widget : {
+            index : 0,
             from : {
                 uuid : null
             },
@@ -8335,6 +8358,18 @@
                 },
                 update : function () {}
             },
+            'export' : {
+                click : function () {
+                    module.Exporter.compileProject();
+                },
+                update : function () {}
+            },
+            'export-no-lib' : {
+                click : function () {
+                    module.Exporter.compileProject(true);
+                },
+                update : function () {}
+            }
         },
         toggleButton : function (btn, override) {
             let state = btn.getAttribute('toggled') === 'true';
@@ -8402,6 +8437,7 @@
 
             // Reset controller element addition
             Interactor.controller.adding.isActive = false;
+            //Interactor.reset();
             
         },
         openController : function () {
@@ -10409,7 +10445,7 @@ triangle(${vertices.join(', ')});`;
                     tag.innerHTML = 'keyboard_arrow_right';
                 }
             }
-        }, 1000);
+        }, 100);
     
         const pages = document.querySelectorAll('.panel-page');
         for (var i = 0; i < 1; i++) {
