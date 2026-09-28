@@ -79,6 +79,21 @@
             elmnt.querySelector(`#${elmnt.id}header`).onmousedown = dragMouseDown;
         }
     }
+    // Code written by Gemini but modified to fit my needs {
+    module.getDragAfterElement = function (container, y) {
+      	const draggableElements = [...container.querySelectorAll('.drag-item:not(.dragging)')];
+    
+      	return draggableElements.reduce((closest, child) => {
+    		const box = child.getBoundingClientRect();
+    		const offset = y - box.top - box.height / 2;
+    		if (offset < 0 && offset > closest.offset) {
+    			return { offset: offset, element: child };
+    		} else {
+    			return closest;
+    		}
+      	}, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+    // }
 
     module.HTML_Build = function (struct) {
         const el = document.createElement(struct.type || 'div'),
@@ -10819,23 +10834,6 @@ triangle(${vertices.join(', ')});`;
     canvas.width = dims.width;
     canvas.height = dims.height;
     const ctx = canvas.getContext('2d');
-    
-    // Code written by Gemini but modified to fit my needs {
-    Interactor.draggedItem.element = null;
-    module.getDragAfterElement = function (container, y) {
-      	const draggableElements = [...container.querySelectorAll('.drag-item:not(.dragging)')];
-    
-      	return draggableElements.reduce((closest, child) => {
-    		const box = child.getBoundingClientRect();
-    		const offset = y - box.top - box.height / 2;
-    		if (offset < 0 && offset > closest.offset) {
-    			return { offset: offset, element: child };
-    		} else {
-    			return closest;
-    		}
-      	}, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
-    // }
     
     let loop = setInterval(function () {
     	Interactor.reset_cursor();
